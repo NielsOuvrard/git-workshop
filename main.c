@@ -3,6 +3,6 @@
 
 int main()
 {
-    printf("Hello, my man!\n");
+    printf("Hello, sdffsdds!\n");
     return 0;
 }
