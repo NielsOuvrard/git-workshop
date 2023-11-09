@@ -145,7 +145,7 @@ a.out
 
 ## Chapter 6: Git Stash
 6.1. **Stashing Changes**
-   - Staging is a way to mark files as ready to be committed. You can use `git stash` to save changes that you don't want to commit yet.
+   - Stashing is a way to mark files as ready to be committed. You can use `git stash` to save changes that you don't want to commit yet.
 
 6.2. **Applying Stashed Changes**
    - Apply stashed changes to your working directory with `git stash apply`.
