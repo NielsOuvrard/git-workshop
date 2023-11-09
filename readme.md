@@ -150,6 +150,126 @@ a.out
 6.2. **Applying Stashed Changes**
    - Apply stashed changes to your working directory with `git stash apply`.
 
+
+## Chapter 7: Github Actions
+
+7.1. **Test your code**
+   - Create a directory `tests` in your project.
+   - Add a file `test.c` (or `test.sh` if you want to use bash) in your `tests` directory.
+   - Create a Makefile who compile your project. Now, add a new target to your Makefile who run your tests `make test`.
+   - Try and check if your tests are working (and return 0 if they are ok).
+
+#### Here an example of a test.sh file :
+
+```bash
+#!/bin/bash
+
+# Run your tests here
+./my_program -arguments1 -arguments2
+
+# Check if the tests passed and set the exit status accordingly
+if [ $? -eq 0 ]; then
+  echo "Tests passed successfully!"
+  exit 0  # Success
+else
+  echo "Tests failed."
+  exit 1  # Failure
+fi
+
+```
+
+7.2. **Create a Github Action**
+   - Create a directory `.github/workflows` in your project.
+   - Add a file `test.yml` in your `.github/workflows` directory.
+   - Add this code in your `test.yml` file :
+
+```yml
+name: Build and Test C++ Project
+
+on: [push] # action will be triggered on every push, exist also on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout the code
+      uses: actions/checkout@v2
+
+    - name: Set up build environment
+      run: |
+        sudo apt-get -y install g++
+      shell: bash
+
+    - name: Build the project
+      run: |
+        make
+      working-directory: ${{ github.workspace }}
+
+    - name: Run tests
+      run: |
+        make test
+      working-directory: ${{ github.workspace }}
+```
+
+More informations about it:
+
+`runs-on` is used to specify the operating system to run the job on. Here, we use ubuntu-latest.
+
+[!warning] The OS windows-latest and macos-latest are not available in the EPITECH servers.
+
+```yml
+    runs-on: ubuntu-latest
+```
+
+`Set up build environment` is used to install dependencies. Here, we install g++. You can add other dependencies like cmake, clang, etc.
+
+```yml
+    - name: Set up build environment
+      run: |
+        sudo apt-get -y install g++
+      shell: bash
+```
+
+`Build the project` is used to build your project. Here, we use make to build our project.
+
+```yml
+    - name: Build the project
+      run: |
+        make
+      working-directory: ${{ github.workspace }}
+```
+
+`Run tests` is used to run your tests. Here, we use make to run our tests.
+
+```yml
+    - name: Run tests
+      run: |
+        make test
+      working-directory: ${{ github.workspace }}
+```
+
+7.3. **Push your changes**
+   - Push your changes to your remote repository.
+   - Go to the `Actions` tab on your repository page on GitHub.
+   - You should see your action running.
+
+7.4. **Go to the `Actions` tab on your repository page on GitHub.**
+
+![image](./assets/go-to-action.png)
+![image](./assets/go-to-last-action.png)
+![image](./assets/go-to-build.png)
+![image](./assets/go-to-run-test.png)
+
+7.5 **You can see the result of your tests directly on GitHub repository.**
+
+#### If your tests are ok, you can see this :
+![image](./assets/last-push-ok.png)
+
+#### If your tests are not ok, you can see this :
+![image](./assets/last-push-error.png)
+
+
 ## Conclusion
 Congratulations! You've completed the Git and GitHub Workshop. You are now equipped with the knowledge and skills to use Git and GitHub effectively in your programming projects. Remember to continue practicing and exploring advanced features to become a Git and GitHub expert.
 
