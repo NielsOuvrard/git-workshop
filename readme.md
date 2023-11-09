@@ -216,7 +216,7 @@ More informations about it:
 
 `runs-on` is used to specify the operating system to run the job on. Here, we use ubuntu-latest.
 
-[!warning] The OS windows-latest and macos-latest are not available in the EPITECH servers.
+> :warning: The OS windows-latest and macos-latest are not available in the EPITECH servers.
 
 ```yml
     runs-on: ubuntu-latest
