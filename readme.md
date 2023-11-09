@@ -43,7 +43,7 @@ A branch will be useful for adding new features to your project without affectin
 ## Chapter 2: Branching and Merging
 2.1. **Create a New Branch**
    - Create a new branch with `git checkout -b <branch-name>`. The `-b` flag creates a new branch. You can call it by your name, like `git checkout -b <your-name>`.
-
+   - Push your branch to the remote repository with `git push --set-upstream origin <branch-name>`.
 #### Now every person of the group have a branch with their name. So you can work on your own branch and push your changes to your branch. You can also merge your branch with the main branch.
 
 
